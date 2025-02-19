@@ -1,99 +1,103 @@
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import Layout from "@/components/Layout";
+import { Card } from "@/components/ui/card";
 import {
-  CreditCard,
+  ArrowDownIcon,
+  ArrowUpIcon,
   DollarSign,
-  Home,
-  LineChart,
-  LogOut,
-  MessageSquare,
-  Settings,
-  Wallet,
+  CreditCard,
+  TrendingUp,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
+const data = [
+  { name: "Jan", amount: 2400 },
+  { name: "Feb", amount: 1398 },
+  { name: "Mar", amount: 9800 },
+  { name: "Apr", amount: 3908 },
+  { name: "May", amount: 4800 },
+  { name: "Jun", amount: 3800 },
+];
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-  const [userName] = useState("Amit Kumar");
-  const [totalBalance] = useState("$24,562.00");
-
-  const sidebarItems = [
-    { icon: Home, label: "Dashboard", path: "/dashboard" },
-    { icon: CreditCard, label: "My Banks", path: "/banks" },
-    { icon: LineChart, label: "Analytics", path: "/analytics" },
-    { icon: Wallet, label: "Crypto", path: "/crypto" },
-    { icon: MessageSquare, label: "Chat", path: "/chat" },
-    { icon: Settings, label: "Settings", path: "/settings" },
-  ];
-
   return (
-    <div className="flex h-screen bg-gray-50">
-      {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-200 p-4">
-        <div className="flex items-center justify-center mb-8">
-          <h1 className="text-2xl font-bold text-primary">Dhasetu</h1>
-        </div>
-
-        <nav className="space-y-2">
-          {sidebarItems.map((item) => (
-            <button
-              key={item.label}
-              onClick={() => navigate(item.path)}
-              className="flex items-center w-full px-4 py-2 text-gray-700 rounded-lg hover:bg-secondary hover:text-primary transition-colors"
-            >
-              <item.icon className="w-5 h-5 mr-3" />
-              {item.label}
-            </button>
-          ))}
-        </nav>
-
-        <div className="absolute bottom-4 w-56">
-          <Button
-            variant="ghost"
-            className="w-full flex items-center justify-center text-gray-700 hover:bg-red-50 hover:text-red-600"
-            onClick={() => navigate("/auth/login")}
-          >
-            <LogOut className="w-5 h-5 mr-2" />
-            Logout
-          </Button>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 overflow-auto">
-        <header className="bg-white border-b border-gray-200 p-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-2xl font-semibold text-gray-800">
-                Welcome back, {userName}
-              </h2>
-              <p className="text-gray-600">Here's your financial overview</p>
-            </div>
-            <div className="text-right">
-              <p className="text-sm text-gray-600">Total Balance</p>
-              <p className="text-2xl font-bold text-primary">{totalBalance}</p>
-            </div>
-          </div>
-        </header>
-
-        <main className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Quick Stats */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-medium text-gray-800">Monthly Spending</h3>
-                <DollarSign className="w-6 h-6 text-primary" />
+    <Layout>
+      <div className="grid gap-6">
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Total Balance</p>
+                <h3 className="text-2xl font-bold text-gray-900">$24,562.00</h3>
+                <p className="text-sm text-green-600 flex items-center mt-1">
+                  <ArrowUpIcon className="w-4 h-4 mr-1" />
+                  +2.5%
+                </p>
               </div>
-              <p className="text-2xl font-bold text-gray-900">$3,458.00</p>
-              <p className="text-sm text-gray-600 mt-1">+2.5% from last month</p>
+              <DollarSign className="w-8 h-8 text-primary" />
             </div>
+          </Card>
 
-            {/* More cards will be added in subsequent updates */}
+          <Card className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Monthly Spending</p>
+                <h3 className="text-2xl font-bold text-gray-900">$3,458.00</h3>
+                <p className="text-sm text-red-600 flex items-center mt-1">
+                  <ArrowDownIcon className="w-4 h-4 mr-1" />
+                  -4.2%
+                </p>
+              </div>
+              <CreditCard className="w-8 h-8 text-primary" />
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Investments</p>
+                <h3 className="text-2xl font-bold text-gray-900">$12,680.00</h3>
+                <p className="text-sm text-green-600 flex items-center mt-1">
+                  <ArrowUpIcon className="w-4 h-4 mr-1" />
+                  +12.5%
+                </p>
+              </div>
+              <TrendingUp className="w-8 h-8 text-primary" />
+            </div>
+          </Card>
+        </div>
+
+        {/* Charts */}
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Monthly Overview</h3>
+          <div className="h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="amount"
+                  stroke="#0066FF"
+                  strokeWidth={2}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
-        </main>
+        </Card>
       </div>
-    </div>
+    </Layout>
   );
 };
 
