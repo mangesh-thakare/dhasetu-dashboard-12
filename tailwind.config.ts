@@ -26,13 +26,13 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#0066FF",
-          hover: "#0052CC",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#1E2F97", // Dhasetu blue
+          hover: "#162073",
+          foreground: "#FFFFFF",
         },
         secondary: {
           DEFAULT: "#F5F7FF",
-          foreground: "#0066FF",
+          foreground: "#1E2F97",
         },
         success: {
           DEFAULT: "#10B981",
@@ -46,18 +46,6 @@ export default {
           DEFAULT: "#EF4444",
           foreground: "#FFFFFF",
         },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
@@ -67,30 +55,6 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-      },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-        slideIn: {
-          from: { transform: "translateX(100%)" },
-          to: { transform: "translateX(0)" },
-        },
-        fadeIn: {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        slideIn: "slideIn 0.3s ease-out",
-        fadeIn: "fadeIn 0.3s ease-out",
       },
     },
   },
