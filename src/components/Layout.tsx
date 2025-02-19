@@ -50,11 +50,14 @@ const Layout = ({ children }: LayoutProps) => {
       {/* Sidebar */}
       <div className="w-64 bg-white dark:bg-dark-card border-r border-gray-200 dark:border-dark-border p-4">
         <div className="flex items-center justify-center mb-8">
-          <img 
-            src="/lovable-uploads/f83270c9-8b86-4b6d-9e57-0ae7521da5b1.png" 
-            alt="Dhasetu" 
-            className="h-12 object-contain" 
-          />
+        <img 
+          src={isDark 
+            ? "https://res.cloudinary.com/dew9g6sk4/image/upload/v1739982780/txjcjhwawzean3d6cprn.png" 
+            : "https://res.cloudinary.com/dew9g6sk4/image/upload/v1739982667/xs1aaudsen6ggnptcujb.png"} 
+          alt="Dhasetu" 
+          className="h-40 w-auto object-contain transition-all duration-300"
+        />
+
         </div>
 
         <nav className="space-y-2">
@@ -126,11 +129,13 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <img 
-                  src="/lovable-uploads/f83270c9-8b86-4b6d-9e57-0ae7521da5b1.png" 
-                  alt="Dhasetu" 
-                  className="h-10 mb-4 object-contain" 
-                />
+              <img 
+                src={isDark 
+                  ? "https://res.cloudinary.com/dew9g6sk4/image/upload/v1739982780/txjcjhwawzean3d6cprn.png" 
+                  : "https://res.cloudinary.com/dew9g6sk4/image/upload/v1739982780/txjcjhwawzean3d6cprn.png"} 
+                alt="Dhasetu" 
+                className="h-40 w-auto object-contain transition-all duration-300"
+              />
                 <p className="text-sm text-gray-400">
                   Empowering your financial journey with innovative solutions.
                 </p>

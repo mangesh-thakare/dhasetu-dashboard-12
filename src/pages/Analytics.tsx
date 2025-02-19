@@ -1,6 +1,7 @@
-
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import {
   LineChart,
   Line,
@@ -42,8 +43,44 @@ const savingsGoals = [
 const Analytics = () => {
   return (
     <Layout>
-      <div className="grid gap-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid gap-6 p-6">
+        {/* Summary Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          <Card className="p-4">
+            <h4 className="text-sm text-gray-500">Total Income</h4>
+            <p className="text-lg font-bold text-green-600">
+              ₹{(monthlyData.reduce((sum, d) => sum + d.income, 0)).toLocaleString("en-IN")}
+            </p>
+          </Card>
+          <Card className="p-4">
+            <h4 className="text-sm text-gray-500">Total Expenses</h4>
+            <p className="text-lg font-bold text-red-600">
+              ₹{(monthlyData.reduce((sum, d) => sum + d.expenses, 0)).toLocaleString("en-IN")}
+            </p>
+          </Card>
+          <Card className="p-4">
+            <h4 className="text-sm text-gray-500">Net Savings</h4>
+            <p className="text-lg font-bold text-primary">
+              ₹{(
+                monthlyData.reduce((sum, d) => sum + d.income, 0) -
+                monthlyData.reduce((sum, d) => sum + d.expenses, 0)
+              ).toLocaleString("en-IN")}
+            </p>
+          </Card>
+        </motion.div>
+
+        {/* Charts Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           <Card className="p-6">
             <h3 className="text-lg font-semibold mb-4">Income vs Expenses</h3>
             <div className="h-[300px]">
@@ -58,18 +95,41 @@ const Analytics = () => {
                     dataKey="income"
                     stroke="#1E2F97"
                     strokeWidth={2}
+                    dot={{ fill: "#1E2F97" }}
                   />
                   <Line
                     type="monotone"
                     dataKey="expenses"
                     stroke="#EF4444"
                     strokeWidth={2}
+                    dot={{ fill: "#EF4444" }}
                   />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </Card>
+          <Card className="p-6">
+            <h3 className="text-lg font-semibold mb-4">Monthly Income (Bar Chart)</h3>
+            <div className="h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="income" fill="#1E2F97" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </Card>
+        </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           <Card className="p-6">
             <h3 className="text-lg font-semibold mb-4">Spending Categories</h3>
             <div className="h-[300px]">
@@ -93,50 +153,57 @@ const Analytics = () => {
               </ResponsiveContainer>
             </div>
           </Card>
-        </div>
-
-        <Card className="p-6">
-          <h3 className="text-lg font-semibold mb-4">Savings Goals Progress</h3>
-          <div className="space-y-4">
-            {savingsGoals.map((goal) => (
-              <div key={goal.name} className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span>{goal.name}</span>
-                  <span>
-                    ${goal.current.toLocaleString()} / $
-                    {goal.target.toLocaleString()}
-                  </span>
+          <Card className="p-6">
+            <h3 className="text-lg font-semibold mb-4">Savings Goals Progress</h3>
+            <div className="space-y-4">
+              {savingsGoals.map((goal) => (
+                <div key={goal.name} className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>{goal.name}</span>
+                    <span>
+                      ${goal.current.toLocaleString()} / $
+                      {goal.target.toLocaleString()}
+                    </span>
+                  </div>
+                  <div className="h-2 bg-gray-200 rounded-full">
+                    <motion.div
+                      className="h-2 bg-primary rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(goal.current / goal.target) * 100}%` }}
+                      transition={{ duration: 0.8 }}
+                    />
+                  </div>
                 </div>
-                <div className="h-2 bg-gray-200 rounded-full">
-                  <div
-                    className="h-2 bg-primary rounded-full transition-all duration-500"
-                    style={{
-                      width: `${(goal.current / goal.target) * 100}%`,
-                    }}
+              ))}
+            </div>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <Card className="p-6">
+            <h3 className="text-lg font-semibold mb-4">Financial Health Score</h3>
+            <div className="flex items-center gap-4">
+              <div className="flex-1">
+                <div className="h-4 bg-gray-200 rounded-full">
+                  <motion.div
+                    className="h-4 bg-primary rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{ width: "75%" }}
+                    transition={{ duration: 1 }}
                   />
                 </div>
               </div>
-            ))}
-          </div>
-        </Card>
-
-        <Card className="p-6">
-          <h3 className="text-lg font-semibold mb-4">Financial Health Score</h3>
-          <div className="flex items-center gap-4">
-            <div className="flex-1">
-              <div className="h-4 bg-gray-200 rounded-full">
-                <div
-                  className="h-4 bg-primary rounded-full"
-                  style={{ width: "75%" }}
-                />
-              </div>
+              <span className="text-2xl font-bold text-primary">750</span>
             </div>
-            <span className="text-2xl font-bold text-primary">750</span>
-          </div>
-          <p className="mt-2 text-sm text-gray-600">
-            Your financial health score is in the excellent range. Keep up the good work!
-          </p>
-        </Card>
+            <p className="mt-2 text-sm text-gray-600">
+              Your financial health score is in the excellent range. Keep up the good work!
+            </p>
+          </Card>
+        </motion.div>
       </div>
     </Layout>
   );
