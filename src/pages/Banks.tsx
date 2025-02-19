@@ -47,21 +47,21 @@ const bankAccounts = [
     bank: "HDFC Bank",
     accountType: "Savings",
     accountNumber: "****6789",
-    balance: "$12,450.00",
+    balance: "₹12,450.00",
   },
   {
     id: 2,
     bank: "ICICI Bank",
     accountType: "Current",
     accountNumber: "****4321",
-    balance: "$8,275.00",
+    balance: "₹8,275.00",
   },
   {
     id: 3,
     bank: "SBI",
     accountType: "Savings",
     accountNumber: "****9876",
-    balance: "$3,837.00",
+    balance: "₹3,837.00",
   },
 ];
 
