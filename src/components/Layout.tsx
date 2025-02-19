@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
@@ -14,6 +13,7 @@ import {
   Mail,
   Phone,
   MapPin,
+  Receipt
 } from "lucide-react";
 import { Button } from "./ui/button";
 
@@ -38,6 +38,7 @@ const Layout = ({ children }: LayoutProps) => {
   const sidebarItems = [
     { icon: Home, label: "Dashboard", path: "/dashboard" },
     { icon: CreditCard, label: "My Banks", path: "/banks" },
+    { icon: Receipt, label: "Transactions", path: "/transactions" },
     { icon: LineChart, label: "Analytics", path: "/analytics" },
     { icon: Wallet, label: "Crypto", path: "/crypto" },
     { icon: MessageSquare, label: "Chat", path: "/chat" },

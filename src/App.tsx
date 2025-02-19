@@ -12,6 +12,7 @@ import Analytics from "./pages/Analytics";
 import Crypto from "./pages/Crypto";
 import Chat from "./pages/Chat";
 import Settings from "./pages/Settings";
+import Transactions from "./pages/Transactions";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/auth/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/banks" element={<Banks />} />
+          <Route path="/transactions" element={<Transactions />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/crypto" element={<Crypto />} />
           <Route path="/chat" element={<Chat />} />
