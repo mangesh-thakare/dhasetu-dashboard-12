@@ -25,58 +25,58 @@ import { Search, Filter, MapPin } from "lucide-react";
 const transactions = [
   {
     id: 1,
-    date: "2024-02-20",
+    date: "2025-01-15",
     description: "Starbucks Coffee",
     type: "debit",
-    amount: -15.50,
+    amount: -1250.00,
     bank: "HDFC Bank",
     account: "****6789",
     category: "Food & Dining",
-    location: "Indiranagar, Bangalore",
+    location: "Koregaon Park, Pune",
   },
   {
     id: 2,
-    date: "2024-02-19",
+    date: "2025-01-25",
     description: "Salary Credit",
     type: "credit",
-    amount: 5000.00,
+    amount: 85000.00,
     bank: "ICICI Bank",
     account: "****4321",
     category: "Income",
-    location: "Electronic City, Bangalore",
+    location: "Hinjewadi, Pune",
   },
   {
     id: 3,
-    date: "2024-02-19",
+    date: "2025-02-01",
     description: "Amazon.in",
     type: "debit",
-    amount: -89.99,
+    amount: -3499.99,
     bank: "HDFC Bank",
     account: "****6789",
     category: "Shopping",
-    location: "HSR Layout, Bangalore",
+    location: "Viman Nagar, Pune",
   },
   {
     id: 4,
-    date: "2024-02-18",
+    date: "2025-02-10",
     description: "Uber Ride",
     type: "debit",
-    amount: -25.00,
+    amount: -450.00,
     bank: "SBI",
     account: "****9876",
     category: "Transportation",
-    location: "Koramangala, Bangalore",
+    location: "Kharadi, Pune",
   },
   {
     id: 5,
-    date: "2024-02-18",
+    date: "2025-02-15",
     description: "Netflix Subscription",
     type: "debit",
-    amount: -12.99,
+    amount: -649.00,
     bank: "ICICI Bank",
     account: "****4321",
     category: "Entertainment",
-    location: "Whitefield, Bangalore",
+    location: "Baner, Pune",
   },
 ];
 
@@ -155,7 +155,7 @@ const Transactions = () => {
               <TableBody>
                 {filteredTransactions.map((transaction) => (
                   <TableRow key={transaction.id} className="group">
-                    <TableCell>{new Date(transaction.date).toLocaleDateString()}</TableCell>
+                    <TableCell>{new Date(transaction.date).toLocaleDateString('en-IN')}</TableCell>
                     <TableCell className="font-medium">{transaction.description}</TableCell>
                     <TableCell>
                       {transaction.bank} ({transaction.account})
@@ -171,7 +171,10 @@ const Transactions = () => {
                       transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'
                     }`}>
                       {transaction.type === 'credit' ? '+' : ''}
-                      ${Math.abs(transaction.amount).toFixed(2)}
+                      ₹{Math.abs(transaction.amount).toLocaleString('en-IN', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                     </TableCell>
                   </TableRow>
                 ))}
