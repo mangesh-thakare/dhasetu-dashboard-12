@@ -1,4 +1,3 @@
-
 import Layout from "@/components/Layout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -75,11 +74,11 @@ const Crypto = () => {
             </div>
             <div className="mt-6">
               <h4 className="font-medium mb-2">Your Wallet</h4>
-              <div className="p-4 bg-secondary rounded-lg">
+              <div className="p-4 bg-secondary dark:bg-dark-border rounded-lg">
                 <p className="text-sm font-mono break-all">
                   0x7a23...45c9
                 </p>
-                <p className="text-xs text-gray-600 mt-1">
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                   Click to copy address
                 </p>
               </div>
@@ -89,34 +88,45 @@ const Crypto = () => {
 
         <Card className="p-6">
           <h3 className="text-lg font-semibold mb-4">Your Crypto Assets</h3>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Symbol</TableHead>
-                <TableHead>Price</TableHead>
-                <TableHead>24h Change</TableHead>
-                <TableHead>Holdings</TableHead>
-                <TableHead className="text-right">Value</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {cryptoData.map((crypto) => (
-                <TableRow key={crypto.symbol}>
-                  <TableCell className="font-medium">{crypto.name}</TableCell>
-                  <TableCell>{crypto.symbol}</TableCell>
-                  <TableCell>{crypto.price}</TableCell>
-                  <TableCell
-                    className={crypto.change.startsWith("+") ? "text-green-600" : "text-red-600"}
-                  >
-                    {crypto.change}
-                  </TableCell>
-                  <TableCell>{crypto.holdings}</TableCell>
-                  <TableCell className="text-right">{crypto.value}</TableCell>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Name</TableHead>
+                  <TableHead>Symbol</TableHead>
+                  <TableHead>Price</TableHead>
+                  <TableHead>24h Change</TableHead>
+                  <TableHead>Holdings</TableHead>
+                  <TableHead className="text-right">Value</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {cryptoData.map((crypto) => (
+                  <TableRow key={crypto.symbol} className="transition-colors hover:bg-gray-50 dark:hover:bg-dark-border">
+                    <TableCell className="font-medium">
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={`/lovable-uploads/${crypto.symbol.toLowerCase()}.png`}
+                          alt={crypto.symbol}
+                          className="w-6 h-6"
+                        />
+                        {crypto.name}
+                      </div>
+                    </TableCell>
+                    <TableCell>{crypto.symbol}</TableCell>
+                    <TableCell>{crypto.price}</TableCell>
+                    <TableCell
+                      className={crypto.change.startsWith("+") ? "text-green-600" : "text-red-600"}
+                    >
+                      {crypto.change}
+                    </TableCell>
+                    <TableCell>{crypto.holdings}</TableCell>
+                    <TableCell className="text-right">{crypto.value}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </Card>
       </div>
     </Layout>
